@@ -4,6 +4,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Entity
@@ -14,6 +15,7 @@ public class Sucursales {
 	@Column(name = "sucursal_id")
 	private Integer sucursalId;
 	
+	@NotNull
 	@Column(name = "nombre")
 	private String nombre;
 }
