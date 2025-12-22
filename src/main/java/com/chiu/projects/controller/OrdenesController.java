@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.chiu.projects.entities.Ordenes;
-import com.chiu.projects.model.OrdenDTO;
+import com.chiu.projects.model.OrdenRequestDTO;
+import com.chiu.projects.model.OrdenResponseDTO;
 import com.chiu.projects.service.OrdenesService;
 
 @RestController
@@ -19,12 +20,12 @@ public class OrdenesController {
 	private OrdenesService ordenesService;
 	
 	@GetMapping("/{id}")
-	public Ordenes getOrden(@PathVariable Integer id) {
+	public OrdenResponseDTO getOrden(@PathVariable Integer id) {
 		return ordenesService.getOrdenes(id);
 	}
 	
 	@PostMapping
-	public Ordenes addOrdenes(@RequestBody OrdenDTO ordenDto) {
+	public OrdenResponseDTO addOrdenes(@RequestBody OrdenRequestDTO ordenDto) {
 		return ordenesService.addOrdenes(ordenDto);
 	}
 }

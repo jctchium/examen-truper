@@ -1,5 +1,7 @@
 package com.chiu.projects.dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -13,5 +15,9 @@ public class ProductosDao {
 	
 	public Productos addProductos(Productos productos) {
 		return productosRepository.save(productos);
+	}
+	
+	public List<Productos> getProductos(Integer orderId) {
+		return productosRepository.findByOrdenId(orderId);
 	}
 }

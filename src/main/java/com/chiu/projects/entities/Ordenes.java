@@ -10,26 +10,26 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name = "Ordenes")
+@Table(name = "ordenes")
 @Data
 public class Ordenes {
 	@Id
 	@Column(name = "orden_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer ordenId;
-	
-	@Column(name = "sucursal_id")
-	private Integer sucursalId;
-	
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "sucursal_id", referencedColumnName = "sucursal_id")
+	private Sucursales sucursales;
+
 	@Column(name = "fecha")
 	private Date fecha;
-	
+
 	@Column(name = "total")
 	private BigDecimal total;
 }
