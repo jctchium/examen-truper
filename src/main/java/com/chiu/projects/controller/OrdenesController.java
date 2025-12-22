@@ -1,6 +1,5 @@
 package com.chiu.projects.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,8 +14,11 @@ import com.chiu.projects.service.OrdenesService;
 @RestController
 @RequestMapping("/ordenes")
 public class OrdenesController {
-	@Autowired
 	private OrdenesService ordenesService;
+	
+	public OrdenesController(OrdenesService ordenesService) {
+		this.ordenesService = ordenesService;
+	}
 	
 	@GetMapping("/{id}")
 	public OrdenResponseDTO getOrden(@PathVariable Integer id) {

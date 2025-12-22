@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.chiu.projects.dao.OrdenesDao;
@@ -19,12 +18,12 @@ import com.chiu.projects.model.ProductoDTO;
 
 @Service
 public class OrdenesService {
-	@Autowired
 	private OrdenesDao ordenesDao;
 	
-	//@Autowired
-	//private ProductosDao productosDao;
-	
+	public OrdenesService(OrdenesDao ordenesDao) {
+		this.ordenesDao = ordenesDao;
+	}
+
 	public OrdenResponseDTO addOrdenes(OrdenRequestDTO ordenDto) {
 		Sucursales sucursales = Sucursales.builder()
 								.sucursalId(ordenDto.getSucursal().getSucursalId())

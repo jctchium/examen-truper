@@ -1,6 +1,5 @@
 package com.chiu.projects.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,8 +11,11 @@ import com.chiu.projects.service.ProductosService;
 @RestController
 @RequestMapping("/productos")
 public class ProductosController {
-	@Autowired
 	private ProductosService productosService;
+	
+	public ProductosController(ProductosService productosService) {
+		this.productosService = productosService;
+	}
 	
 	@PutMapping
 	public ProductoDTO updateProductos(@RequestBody ProductoDTO productoDTO) {

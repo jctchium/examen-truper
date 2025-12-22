@@ -2,7 +2,6 @@ package com.chiu.projects.service;
 
 import java.math.BigDecimal;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.chiu.projects.dao.OrdenesDao;
@@ -14,11 +13,14 @@ import com.chiu.projects.model.ProductoDTO;
 
 @Service
 public class ProductosService {
-	@Autowired
 	private ProductosDao productosDao;
-	
-	@Autowired
 	private OrdenesDao ordenesDao;
+	
+	public ProductosService(ProductosDao productosDao,
+							OrdenesDao ordenesDao) {
+		this.productosDao = productosDao;
+		this.ordenesDao = ordenesDao;
+	}
 	
 	public ProductoDTO updateProductos(ProductoDTO productoDTO) {
 		Productos productos = productosDao.findByCodigo(productoDTO.getCodigo());
