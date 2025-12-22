@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.chiu.projects.entities.Ordenes;
 import com.chiu.projects.model.OrdenRequestDTO;
 import com.chiu.projects.model.OrdenResponseDTO;
 import com.chiu.projects.service.OrdenesService;

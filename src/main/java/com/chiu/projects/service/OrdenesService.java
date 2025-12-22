@@ -1,6 +1,7 @@
 package com.chiu.projects.service;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -9,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import com.chiu.projects.dao.OrdenesDao;
 import com.chiu.projects.dao.ProductosDao;
-import com.chiu.projects.dao.SucursalesDao;
 import com.chiu.projects.entities.Ordenes;
 import com.chiu.projects.entities.Productos;
 import com.chiu.projects.entities.Sucursales;
@@ -26,21 +26,16 @@ public class OrdenesService {
 	@Autowired
 	private ProductosDao productosDao;
 	
-	@Autowired
-	private SucursalesDao sucursalesDao;
-	
 	public OrdenResponseDTO addOrdenes(OrdenRequestDTO ordenDto) {
 		Sucursales sucursales = new Sucursales();
 		sucursales.setSucursalId(ordenDto.getSucursal().getSucursalId());
 		sucursales.setNombre(ordenDto.getSucursal().getNombre());
 
-		//sucursalesDao.addSucursal(sucursales);
-
 		Ordenes ordenes = new Ordenes();		
 		ordenes.setSucursales(sucursales);
 		ordenes.setFecha(new Date());
 		
-		Ordenes ordenesSaved = ordenesDao.addOrdenes(ordenes);
+		List<Productos> listProductos = new ArrayList<Productos>();
 		Productos productos;
 		BigDecimal total = BigDecimal.ZERO;
 		
@@ -50,26 +45,24 @@ public class OrdenesService {
 			productos.setDescripcion(productoDto.getDescripcion());
 			productos.setCodigo(productoDto.getCodigo());
 			productos.setPrecio(productoDto.getPrecio());
-			productos.setOrdenId(ordenesSaved.getOrdenId());
+			productos.setOrdenes(ordenes);
 			
-			productosDao.addProductos(productos);
+			listProductos.add(productos);
 			total = total.add(productos.getPrecio());
 		}
-		
+
 		ordenes.setTotal(total);
-		ordenesSaved = ordenesDao.addOrdenes(ordenesSaved);
-		List<Productos> listProductos = productosDao.getProductos(ordenesSaved.getOrdenId());
+		ordenes.setProductos(listProductos);
 		
-		//sucursales.setOrdenes(ordenesSaved);
-		//Sucursales sucursalesSaved = sucursalesDao.addSucursal(sucursales);
+		Ordenes ordenesSaved = ordenesDao.addOrdenes(ordenes);
+		productosDao.addProductos(listProductos);
 		
-		return OrdenesMapper.mapOrdenes(ordenesSaved, listProductos);
+		return OrdenesMapper.mapOrdenes(ordenesSaved);
 	}
 	
 	public OrdenResponseDTO getOrdenes(Integer orderId) {
 		Ordenes ordenes = ordenesDao.getOrdenes(orderId);
-		List<Productos> productos = productosDao.getProductos(orderId);
 		
-		return OrdenesMapper.mapOrdenes(ordenes, productos);
+		return OrdenesMapper.mapOrdenes(ordenes);
 	}
 }

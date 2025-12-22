@@ -13,11 +13,7 @@ public class ProductosDao {
 	@Autowired
 	private ProductosRepository productosRepository;
 	
-	public Productos addProductos(Productos productos) {
-		return productosRepository.save(productos);
-	}
-	
-	public List<Productos> getProductos(Integer orderId) {
-		return productosRepository.findByOrdenId(orderId);
+	public List<Productos> addProductos(List<Productos> listProductos) {
+		return productosRepository.saveAll(listProductos);
 	}
 }

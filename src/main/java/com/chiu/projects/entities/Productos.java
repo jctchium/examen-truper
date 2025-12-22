@@ -1,12 +1,12 @@
 package com.chiu.projects.entities;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -19,8 +19,9 @@ public class Productos {
 	@Column(name = "producto_id")
 	private Integer productoId;
 	
-	@Column(name = "orden_id")
-	private Integer ordenId;
+	@ManyToOne
+    @JoinColumn(name="orden_id", nullable=false)
+    private Ordenes ordenes;
 	
 	@Column(name = "codigo")
 	@NotNull

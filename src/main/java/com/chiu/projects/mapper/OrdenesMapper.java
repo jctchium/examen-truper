@@ -10,7 +10,7 @@ import com.chiu.projects.model.ProductoDTO;
 import com.chiu.projects.model.SucursalDTO;
 
 public class OrdenesMapper {
-	public static OrdenResponseDTO mapOrdenes(Ordenes ordenes, List<Productos> productos) {
+	public static OrdenResponseDTO mapOrdenes(Ordenes ordenes) {
 		OrdenResponseDTO ordenResponseDTO = new OrdenResponseDTO();
 		ordenResponseDTO.setOrdenId(ordenes.getOrdenId());
 		ordenResponseDTO.setFecha(ordenes.getFecha());
@@ -22,7 +22,7 @@ public class OrdenesMapper {
 		ordenResponseDTO.setSucursales(sucursalDTO);
 		
 		List<ProductoDTO> listProductoDTO = new ArrayList<ProductoDTO>();
-		productos.forEach(productodb -> mapProducto(productodb, listProductoDTO));
+		ordenes.getProductos().forEach(productodb -> mapProducto(productodb, listProductoDTO));
 		
 		ordenResponseDTO.setProductos(listProductoDTO);
 		
