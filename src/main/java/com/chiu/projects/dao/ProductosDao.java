@@ -16,4 +16,12 @@ public class ProductosDao {
 	public List<Productos> addProductos(List<Productos> listProductos) {
 		return productosRepository.saveAll(listProductos);
 	}
+	
+	public Productos findByCodigo(String codigo) {
+		return productosRepository.findByCodigo(codigo);
+	}
+	
+	public Productos updateProductos(Productos productos) {
+		return productosRepository.save(productos);
+	}
 }

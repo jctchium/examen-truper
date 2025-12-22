@@ -7,5 +7,5 @@ import com.chiu.projects.entities.Productos;
 
 @Repository
 public interface ProductosRepository extends JpaRepository<Productos, Integer>{
-	
+	public Productos findByCodigo(String codigo);
 }
