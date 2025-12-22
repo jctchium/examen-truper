@@ -8,6 +8,8 @@ import com.chiu.projects.dao.OrdenesDao;
 import com.chiu.projects.dao.ProductosDao;
 import com.chiu.projects.entities.Ordenes;
 import com.chiu.projects.entities.Productos;
+import com.chiu.projects.exception.OrdenesDataException;
+import com.chiu.projects.exception.ProductosDataException;
 import com.chiu.projects.mapper.ProductosMapper;
 import com.chiu.projects.model.ProductoDTO;
 
@@ -22,7 +24,7 @@ public class ProductosService {
 		this.ordenesDao = ordenesDao;
 	}
 	
-	public ProductoDTO updateProductos(ProductoDTO productoDTO) {
+	public ProductoDTO updateProductos(ProductoDTO productoDTO) throws OrdenesDataException, ProductosDataException{
 		Productos productos = productosDao.findByCodigo(productoDTO.getCodigo());
 		if(productoDTO.getDescripcion() != null) {
 			productos.setDescripcion(productoDTO.getDescripcion());

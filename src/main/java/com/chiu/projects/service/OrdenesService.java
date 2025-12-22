@@ -11,6 +11,7 @@ import com.chiu.projects.dao.OrdenesDao;
 import com.chiu.projects.entities.Ordenes;
 import com.chiu.projects.entities.Productos;
 import com.chiu.projects.entities.Sucursales;
+import com.chiu.projects.exception.OrdenesDataException;
 import com.chiu.projects.mapper.OrdenesMapper;
 import com.chiu.projects.model.OrdenRequestDTO;
 import com.chiu.projects.model.OrdenResponseDTO;
@@ -61,7 +62,7 @@ public class OrdenesService {
 				.build();
 	}
 
-	public OrdenResponseDTO getOrdenes(Integer orderId) {
+	public OrdenResponseDTO getOrdenes(Integer orderId) throws OrdenesDataException{
 		Ordenes ordenes = ordenesDao.getOrdenes(orderId);
 		
 		return OrdenesMapper.mapOrdenes(ordenes);
