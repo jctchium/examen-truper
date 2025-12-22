@@ -6,6 +6,8 @@ import java.util.Date;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.MapsId;
@@ -19,6 +21,7 @@ import lombok.Data;
 public class Ordenes {
 	@Id
 	@Column(name = "orden_id")
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer ordenId;
 	
 	@Column(name = "sucursal_id")
@@ -28,5 +31,5 @@ public class Ordenes {
 	private Date fecha;
 	
 	@Column(name = "total")
-	private BigDecimal precio;
+	private BigDecimal total;
 }
