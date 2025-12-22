@@ -14,10 +14,16 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "ordenes")
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Data
 public class Ordenes {
 	@Id
@@ -29,7 +35,7 @@ public class Ordenes {
 	@JoinColumn(name = "sucursal_id", referencedColumnName = "sucursal_id")
 	private Sucursales sucursales;
 	
-	@OneToMany(mappedBy="ordenes")
+	@OneToMany(mappedBy="ordenes", cascade = CascadeType.ALL)
     private List<Productos> productos;
 
 	@Column(name = "fecha")

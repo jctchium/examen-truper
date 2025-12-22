@@ -11,32 +11,32 @@ import com.chiu.projects.model.SucursalDTO;
 
 public class OrdenesMapper {
 	public static OrdenResponseDTO mapOrdenes(Ordenes ordenes) {
-		OrdenResponseDTO ordenResponseDTO = new OrdenResponseDTO();
-		ordenResponseDTO.setOrdenId(ordenes.getOrdenId());
-		ordenResponseDTO.setFecha(ordenes.getFecha());
-		
-		SucursalDTO sucursalDTO = new SucursalDTO();
-		sucursalDTO.setNombre(ordenes.getSucursales().getNombre());
-		sucursalDTO.setSucursalId(ordenes.getSucursales().getSucursalId());
-		
-		ordenResponseDTO.setSucursales(sucursalDTO);
+		SucursalDTO sucursalDTO = SucursalDTO.builder()
+									.nombre(ordenes.getSucursales().getNombre())
+									.sucursalId(ordenes.getSucursales().getSucursalId())
+									.build();
 		
 		List<ProductoDTO> listProductoDTO = new ArrayList<ProductoDTO>();
 		ordenes.getProductos().forEach(productodb -> mapProducto(productodb, listProductoDTO));
 		
-		ordenResponseDTO.setProductos(listProductoDTO);
-		
-		ordenResponseDTO.setTotal(ordenes.getTotal());
-		
+		OrdenResponseDTO ordenResponseDTO = OrdenResponseDTO.builder()
+											.ordenId(ordenes.getOrdenId())
+											.fecha(ordenes.getFecha())
+											.sucursales(sucursalDTO)
+											.productos(listProductoDTO)
+											.total(ordenes.getTotal())
+											.build();
+
 		return ordenResponseDTO;
 	}
-	
+
 	private static void mapProducto(Productos producto, List<ProductoDTO> listProductos) {
-		ProductoDTO productoDTO = new ProductoDTO();
-		productoDTO.setCodigo(producto.getCodigo());
-		productoDTO.setDescripcion(producto.getDescripcion());
-		productoDTO.setPrecio(producto.getPrecio());
-		productoDTO.setProductoId(producto.getProductoId());
+		ProductoDTO productoDTO = ProductoDTO.builder()
+									.codigo(producto.getCodigo())
+									.descripcion(producto.getDescripcion())
+									.precio(producto.getPrecio())
+									.productoId(producto.getProductoId())
+									.build();
 		
 		listProductos.add(productoDTO);
 	}

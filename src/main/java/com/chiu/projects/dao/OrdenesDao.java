@@ -1,7 +1,5 @@
 package com.chiu.projects.dao;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,8 +16,6 @@ public class OrdenesDao {
 	}
 	
 	public Ordenes getOrdenes(Integer id) {
-		Optional<Ordenes> optOrdenes = ordenesRepository.findById(id);
-		
-		return optOrdenes.get();
+		return ordenesRepository.findById(id).get();
 	}
 }
