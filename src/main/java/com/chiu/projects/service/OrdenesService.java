@@ -17,6 +17,8 @@ import com.chiu.projects.model.OrdenRequestDTO;
 import com.chiu.projects.model.OrdenResponseDTO;
 import com.chiu.projects.model.ProductoDTO;
 
+import io.micrometer.observation.annotation.Observed;
+
 @Service
 public class OrdenesService {
 	private OrdenesDao ordenesDao;
@@ -25,6 +27,7 @@ public class OrdenesService {
 		this.ordenesDao = ordenesDao;
 	}
 
+	@Observed(name = "add.ordenes")
 	public OrdenResponseDTO addOrdenes(OrdenRequestDTO ordenDto) {
 		Sucursales sucursales = Sucursales.builder()
 								.sucursalId(ordenDto.getSucursal().getSucursalId())
@@ -62,6 +65,7 @@ public class OrdenesService {
 				.build();
 	}
 
+	@Observed(name = "get.ordenes")
 	public OrdenResponseDTO getOrdenes(Integer orderId) throws OrdenesDataException{
 		Ordenes ordenes = ordenesDao.getOrdenes(orderId);
 		

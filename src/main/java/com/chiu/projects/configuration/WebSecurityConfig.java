@@ -47,6 +47,7 @@ public class WebSecurityConfig {
 				.authorizeHttpRequests(request -> request
 														.requestMatchers("/token").permitAll()
 														.requestMatchers(AntPathRequestMatcher.antMatcher("/h2-ui/**")).permitAll()
+														.requestMatchers(AntPathRequestMatcher.antMatcher("/actuator/**")).permitAll()
 														.anyRequest().authenticated()
 									)
 				.exceptionHandling(exception -> exception.authenticationEntryPoint(jwtAuthenticationEntryPoint)

@@ -13,6 +13,8 @@ import com.chiu.projects.exception.ProductosDataException;
 import com.chiu.projects.mapper.ProductosMapper;
 import com.chiu.projects.model.ProductoDTO;
 
+import io.micrometer.observation.annotation.Observed;
+
 @Service
 public class ProductosService {
 	private ProductosDao productosDao;
@@ -24,6 +26,7 @@ public class ProductosService {
 		this.ordenesDao = ordenesDao;
 	}
 	
+	@Observed(name = "update.productos")
 	public ProductoDTO updateProductos(ProductoDTO productoDTO) throws OrdenesDataException, ProductosDataException{
 		Productos productos = productosDao.findByCodigo(productoDTO.getCodigo());
 		if(productoDTO.getDescripcion() != null) {
