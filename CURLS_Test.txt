@@ -1,0 +1,51 @@
+CURL Get Token
+
+curl --location --request POST 'http://localhost:8080/token' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "username":"randomuser123",
+    "password":"password"
+}'
+
+CURL Post Orden
+
+curl --location --request POST 'http://localhost:8080/ordenes' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyYW5kb211c2VyMTIzIiwiaWF0IjoxNzY2NDQ4ODcxLCJleHAiOjE3NjY0ODQ4NzF9.EphEO2ZOTlRu04xprypN2YQOeB2K0DTZXHr03Ts7vsw' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "sucursal": {
+        "sucursalId":1,
+        "nombre":"CDMX"
+    },
+    "listProductos": [
+        {
+            "productoId":1,
+            "descripcion":"Esmeriladora angular",
+            "codigo":"18156",
+            "precio":625
+        },
+        {
+            "productoId":2,
+            "descripcion":"Pala redonda",
+            "codigo":"17193",
+            "precio": 100.50
+        }
+    ]
+}'
+
+CURL Get Orden
+
+curl --location --request GET 'http://localhost:8080/ordenes/1' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyYW5kb211c2VyMTIzIiwiaWF0IjoxNzY2NDQ4ODcxLCJleHAiOjE3NjY0ODQ4NzF9.EphEO2ZOTlRu04xprypN2YQOeB2K0DTZXHr03Ts7vsw'
+
+CURL Put Producto
+
+curl --location --request PUT 'http://localhost:8080/productos' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyYW5kb211c2VyMTIzIiwiaWF0IjoxNzY2NDQ4ODcxLCJleHAiOjE3NjY0ODQ4NzF9.EphEO2ZOTlRu04xprypN2YQOeB2K0DTZXHr03Ts7vsw' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "productoId":2,
+    "descripcion": "Pala redonda",
+    "codigo":"17193",
+    "precio":99.99
+}'
